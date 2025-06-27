@@ -1,160 +1,82 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Circle, Square, Triangle } from 'lucide-react';
+import { Trophy, Medal, Award } from 'lucide-react';
+import { useLeaderboard } from '@/hooks/useLeaderboard';
 
 const Leaderboard = () => {
-  const topPlayers = [
-    { rank: 1, name: 'Player001', wins: 47, earnings: '940,000 RWF', badge: 'LEGEND' },
-    { rank: 2, name: 'SkillMaster', wins: 43, earnings: '860,000 RWF', badge: 'CHAMPION' },
-    { rank: 3, name: 'QuickThink', wins: 39, earnings: '780,000 RWF', badge: 'EXPERT' },
-    { rank: 4, name: 'MindBender', wins: 35, earnings: '700,000 RWF', badge: 'PRO' },
-    { rank: 5, name: 'FastFingers', wins: 32, earnings: '640,000 RWF', badge: 'RISING' },
-  ];
+  const { leaderboard, loading } = useLeaderboard();
 
-  const topTeams = [
-    { rank: 1, name: 'Red Guardians', members: 5, wins: 23, earnings: '1,150,000 RWF' },
-    { rank: 2, name: 'Green Machines', members: 4, wins: 21, earnings: '1,050,000 RWF' },
-    { rank: 3, name: 'Triangle Force', members: 5, wins: 19, earnings: '950,000 RWF' },
-  ];
-
-  const recentWinners = [
-    { name: 'Player087', challenge: 'Solo Arena', prize: '20,000 RWF', time: '2 mins ago' },
-    { name: 'Team Alpha', challenge: 'Team Battle', prize: '75,000 RWF', time: '8 mins ago' },
-    { name: 'QuickWit', challenge: 'Solo Arena', prize: '20,000 RWF', time: '15 mins ago' },
-    { name: 'Speed Demons', challenge: 'Team Battle', prize: '60,000 RWF', time: '23 mins ago' },
+  // Mock data for demonstration when no real data exists
+  const mockLeaderboard = [
+    { rank: 1, name: 'Player001', wins: 12, earnings: 240000 },
+    { rank: 2, name: 'Player456', wins: 8, earnings: 160000 },
+    { rank: 3, name: 'Player789', wins: 6, earnings: 120000 },
+    { rank: 4, name: 'Player234', wins: 4, earnings: 80000 },
+    { rank: 5, name: 'Player567', wins: 3, earnings: 60000 },
   ];
 
   const getRankIcon = (rank: number) => {
-    switch(rank) {
-      case 1: return <Circle className="w-6 h-6 text-squid-red" />;
-      case 2: return <Triangle className="w-6 h-6 text-squid-green" />;
-      case 3: return <Square className="w-6 h-6 text-white" />;
-      default: return <div className="w-6 h-6 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs font-bold">{rank}</div>;
-    }
+    if (rank === 1) return <Trophy className="w-5 h-5 text-yellow-500" />;
+    if (rank === 2) return <Medal className="w-5 h-5 text-gray-400" />;
+    if (rank === 3) return <Award className="w-5 h-5 text-amber-600" />;
+    return <span className="w-5 h-5 flex items-center justify-center text-sm font-bold text-gray-400">#{rank}</span>;
   };
 
-  const getBadgeColor = (badge: string) => {
-    switch(badge) {
-      case 'LEGEND': return 'bg-squid-red';
-      case 'CHAMPION': return 'bg-squid-green text-squid-dark';
-      case 'EXPERT': return 'bg-white text-squid-dark';
-      default: return 'bg-squid-gray';
-    }
-  };
+  const displayData = leaderboard.length > 0 ? leaderboard.map((entry) => ({
+    rank: entry.ranking || 0,
+    name: entry.profiles?.full_name || `Player${entry.user_id.slice(-3)}`,
+    wins: entry.wins,
+    earnings: entry.total_earnings
+  })) : mockLeaderboard;
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-squid-dark to-squid-darker">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Hall of <span className="text-squid-green neon-glow">Champions</span>
+    <section className="py-16">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">
+            Arena <span className="text-squid-red">Champions</span>
           </h2>
-          <p className="text-xl text-gray-300">
-            The elite players and teams dominating the Arena
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            The elite players who have conquered the challenges and claimed their prizes. 
+            Will you join their ranks?
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Top Solo Players */}
-          <Card className="squid-card">
+        <div className="max-w-4xl mx-auto">
+          <Card className="squid-card border-squid-gray">
             <CardHeader>
-              <CardTitle className="flex items-center text-squid-red">
-                <Circle className="w-6 h-6 mr-2" />
-                Top Solo Players
+              <CardTitle className="text-white flex items-center">
+                <Trophy className="w-6 h-6 text-squid-red mr-2" />
+                Top Players - All Time
               </CardTitle>
-              <CardDescription>This week's champion solo competitors</CardDescription>
+              <CardDescription className="text-gray-400">
+                {loading ? 'Loading leaderboard...' : 'Based on total wins and earnings'}
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {topPlayers.map((player) => (
-                <div key={player.rank} className="flex items-center justify-between p-3 rounded-lg bg-squid-gray/30 hover:bg-squid-gray/50 transition-colors">
-                  <div className="flex items-center space-x-3">
-                    {getRankIcon(player.rank)}
-                    <div>
-                      <div className="font-semibold">{player.name}</div>
-                      <div className="text-sm text-gray-400">{player.wins} wins</div>
+            <CardContent>
+              <div className="space-y-4">
+                {displayData.map((player, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 bg-squid-darker/50 rounded-lg hover:bg-squid-darker transition-colors">
+                    <div className="flex items-center space-x-4">
+                      {getRankIcon(player.rank)}
+                      <div>
+                        <div className="font-semibold text-white">{player.name}</div>
+                        <div className="text-sm text-gray-400">{player.wins} wins</div>
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      <div className="font-bold text-squid-green">{player.earnings.toLocaleString()} RWF</div>
+                      <Badge variant="outline" className="text-xs border-squid-gray text-gray-400">
+                        Total Earnings
+                      </Badge>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <Badge className={`${getBadgeColor(player.badge)} text-xs mb-1`}>
-                      {player.badge}
-                    </Badge>
-                    <div className="text-sm font-semibold text-squid-green">{player.earnings}</div>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Top Teams */}
-          <Card className="squid-card">
-            <CardHeader>
-              <CardTitle className="flex items-center text-squid-green">
-                <Triangle className="w-6 h-6 mr-2" />
-                Top Teams
-              </CardTitle>
-              <CardDescription>Dominant team battle champions</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {topTeams.map((team) => (
-                <div key={team.rank} className="flex items-center justify-between p-3 rounded-lg bg-squid-gray/30 hover:bg-squid-gray/50 transition-colors">
-                  <div className="flex items-center space-x-3">
-                    {getRankIcon(team.rank)}
-                    <div>
-                      <div className="font-semibold">{team.name}</div>
-                      <div className="text-sm text-gray-400">{team.members} members • {team.wins} wins</div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm font-semibold text-squid-green">{team.earnings}</div>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Recent Winners */}
-          <Card className="squid-card">
-            <CardHeader>
-              <CardTitle className="flex items-center text-white">
-                <Square className="w-6 h-6 mr-2" />
-                Live Winners
-              </CardTitle>
-              <CardDescription>Recent prize winners in real-time</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {recentWinners.map((winner, index) => (
-                <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-squid-green/10 border border-squid-green/20 animate-winner-reveal">
-                  <div>
-                    <div className="font-semibold text-squid-green">{winner.name}</div>
-                    <div className="text-sm text-gray-400">{winner.challenge}</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold text-squid-green">{winner.prize}</div>
-                    <div className="text-xs text-gray-400">{winner.time}</div>
-                  </div>
-                </div>
-              ))}
-              
-              <div className="text-center pt-4">
-                <div className="text-sm text-gray-400">
-                  🔴 Live updates • Winners announced instantly
-                </div>
+                ))}
               </div>
             </CardContent>
           </Card>
-        </div>
-
-        {/* Achievement Badges */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold mb-8">Achievement Levels</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Badge className="bg-squid-red text-lg px-4 py-2">🏆 LEGEND</Badge>
-            <Badge className="bg-squid-green text-squid-dark text-lg px-4 py-2">👑 CHAMPION</Badge>
-            <Badge className="bg-white text-squid-dark text-lg px-4 py-2">⭐ EXPERT</Badge>
-            <Badge className="bg-squid-gray text-lg px-4 py-2">🚀 PRO</Badge>
-            <Badge className="bg-squid-gray/50 text-lg px-4 py-2">📈 RISING</Badge>
-          </div>
         </div>
       </div>
     </section>
