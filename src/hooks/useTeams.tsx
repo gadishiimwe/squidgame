@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -48,6 +47,8 @@ export const useTeams = () => {
           team_members (
             id,
             user_id,
+            team_id,
+            joined_at,
             profiles (
               full_name,
               email
@@ -61,7 +62,13 @@ export const useTeams = () => {
 
       const processedTeams = teamsData?.map(team => ({
         ...team,
-        members: team.team_members,
+        members: team.team_members?.map(member => ({
+          id: member.id,
+          user_id: member.user_id,
+          team_id: member.team_id,
+          joined_at: member.joined_at,
+          profiles: member.profiles
+        })) || [],
         member_count: team.team_members?.length || 0
       })) || [];
 
