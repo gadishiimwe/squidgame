@@ -3,9 +3,12 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Circle, Square, Triangle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 const HeroSection = () => {
   const [playersOnline, setPlayersOnline] = useState(1247);
+  const { user } = useAuth();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,12 +47,16 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-12">
-          <Button className="squid-button text-lg px-8 py-4 h-auto animate-pulse-glow">
-            🔥 Join Solo Challenge - 5,000 RWF
-          </Button>
-          <Button className="squid-button-green text-lg px-8 py-4 h-auto">
-            👥 Create Team Battle
-          </Button>
+          <Link to={user ? "/challenge" : "/auth"}>
+            <Button className="squid-button text-lg px-8 py-4 h-auto animate-pulse-glow">
+              🔥 Join Solo Challenge - 5,000 RWF
+            </Button>
+          </Link>
+          <Link to={user ? "/teams" : "/auth"}>
+            <Button className="squid-button-green text-lg px-8 py-4 h-auto">
+              👥 Create Team Battle
+            </Button>
+          </Link>
         </div>
 
         {/* Live Stats */}
