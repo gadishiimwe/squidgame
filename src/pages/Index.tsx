@@ -13,7 +13,7 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour countdown
-  const { user, loading } = useAuth();
+  const { user, profile, loading } = useAuth();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,9 +55,25 @@ const Index = () => {
               Next Round: <span className="text-squid-green font-mono animate-countdown">{formatTime(timeLeft)}</span>
             </div>
             {user ? (
-              <Button className="squid-button">
-                Join Challenge
-              </Button>
+              <div className="flex items-center space-x-3">
+                <Link to="/dashboard">
+                  <Button variant="outline" className="border-squid-green text-squid-green hover:bg-squid-green hover:text-squid-dark">
+                    Dashboard
+                  </Button>
+                </Link>
+                {profile?.role === 'admin' && (
+                  <Link to="/admin">
+                    <Button variant="outline" className="border-squid-red text-squid-red hover:bg-squid-red hover:text-white">
+                      Admin
+                    </Button>
+                  </Link>
+                )}
+                <Link to="/challenge">
+                  <Button className="squid-button">
+                    Join Challenge
+                  </Button>
+                </Link>
+              </div>
             ) : (
               <>
                 <Link to="/auth">

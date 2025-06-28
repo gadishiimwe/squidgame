@@ -3,8 +3,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Circle, Square, Triangle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 const GameModes = () => {
+  const { user } = useAuth();
+  
   const soloStats = {
     playersWaiting: 3,
     nextRound: '5 mins',
@@ -85,9 +89,11 @@ const GameModes = () => {
                 </div>
               </div>
 
-              <Button className="w-full squid-button text-lg py-3 group-hover:animate-pulse-glow">
-                Join Solo Challenge - {soloStats.entry}
-              </Button>
+              <Link to={user ? "/challenge" : "/auth"}>
+                <Button className="w-full squid-button text-lg py-3 group-hover:animate-pulse-glow">
+                  Join Solo Challenge - {soloStats.entry}
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 
@@ -146,12 +152,16 @@ const GameModes = () => {
               </div>
 
               <div className="flex gap-3">
-                <Button className="flex-1 squid-button-green group-hover:animate-pulse">
-                  Create Team
-                </Button>
-                <Button variant="outline" className="flex-1 border-squid-green text-squid-green hover:bg-squid-green hover:text-squid-dark">
-                  Join Team
-                </Button>
+                <Link to={user ? "/teams" : "/auth"} className="flex-1">
+                  <Button className="w-full squid-button-green group-hover:animate-pulse">
+                    Create Team
+                  </Button>
+                </Link>
+                <Link to={user ? "/teams" : "/auth"} className="flex-1">
+                  <Button variant="outline" className="w-full border-squid-green text-squid-green hover:bg-squid-green hover:text-squid-dark">
+                    Join Team
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
