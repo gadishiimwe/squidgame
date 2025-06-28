@@ -8,9 +8,12 @@ import { Wallet, Trophy, Users, History, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Link } from 'react-router-dom';
 import UserProfile from '@/components/UserProfile';
+import WalletTopup from '@/components/WalletTopup';
+import { useTeams } from '@/hooks/useTeams';
 
 const Dashboard = () => {
   const { user, profile } = useAuth();
+  const { myTeam } = useTeams();
   const [activeTab, setActiveTab] = useState('overview');
 
   // Mock data for demonstration
@@ -19,13 +22,6 @@ const Dashboard = () => {
     { id: 2, name: 'Team Battle Alpha', date: '2024-12-26', result: 'Lost', prize: 0 },
     { id: 3, name: 'Solo Challenge #122', date: '2024-12-25', result: 'Won', prize: 15000 },
   ];
-
-  const teamInfo = {
-    name: 'Team Alpha',
-    members: 4,
-    wins: 3,
-    totalEarnings: 45000
-  };
 
   if (!user) {
     return (
@@ -113,9 +109,7 @@ const Dashboard = () => {
                             Manage Teams
                           </Button>
                         </Link>
-                        <Button variant="outline" className="w-full border-squid-gray text-white hover:bg-squid-gray">
-                          Add Money to Wallet
-                        </Button>
+                        <WalletTopup />
                       </CardContent>
                     </Card>
 
@@ -168,37 +162,52 @@ const Dashboard = () => {
                 </TabsContent>
 
                 <TabsContent value="teams" className="space-y-4">
-                  <Card className="bg-squid-darker border-squid-gray">
-                    <CardHeader>
-                      <CardTitle className="text-white">Your Team: {teamInfo.name}</CardTitle>
-                      <CardDescription className="text-gray-400">
-                        Manage your team and view team statistics
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-white">{teamInfo.members}</div>
-                          <div className="text-sm text-gray-400">Members</div>
+                  {myTeam ? (
+                    <Card className="bg-squid-darker border-squid-gray">
+                      <CardHeader>
+                        <CardTitle className="text-white">Your Team: {myTeam.name}</CardTitle>
+                        <CardDescription className="text-gray-400">
+                          Manage your team and view team statistics
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-white">{myTeam.member_count || 0}</div>
+                            <div className="text-sm text-gray-400">Members</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-squid-green">0</div>
+                            <div className="text-sm text-gray-400">Team Wins</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-white">0 RWF</div>
+                            <div className="text-sm text-gray-400">Total Earnings</div>
+                          </div>
+                          <div className="text-center">
+                            <Link to="/teams">
+                              <Button className="squid-button-green">
+                                Manage Team
+                              </Button>
+                            </Link>
+                          </div>
                         </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-squid-green">{teamInfo.wins}</div>
-                          <div className="text-sm text-gray-400">Team Wins</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-white">{teamInfo.totalEarnings}</div>
-                          <div className="text-sm text-gray-400">Total Earnings</div>
-                        </div>
-                        <div className="text-center">
-                          <Link to="/teams">
-                            <Button className="squid-button-green">
-                              Manage Team
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  ) : (
+                    <Card className="bg-squid-darker border-squid-gray">
+                      <CardContent className="p-8 text-center">
+                        <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                        <h3 className="text-lg font-semibold text-white mb-2">No Team Yet</h3>
+                        <p className="text-gray-400 mb-4">Create or join a team to participate in team battles</p>
+                        <Link to="/teams">
+                          <Button className="squid-button-green">
+                            Manage Teams
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  )}
                 </TabsContent>
               </Tabs>
             </CardContent>
