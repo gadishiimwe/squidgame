@@ -54,8 +54,8 @@
   }
 
   body {
-    @apply bg-squid-dark text-white font-sans;
-    background: radial-gradient(ellipse at top, #1A1A1A 0%, #0D0D0D 100%);
+    @apply bg-background text-foreground font-sans;
+    background: radial-gradient(ellipse at top, hsl(var(--card)) 0%, hsl(var(--background)) 100%);
     min-height: 100vh;
   }
 
@@ -66,15 +66,17 @@
 
 @layer components {
   .squid-button {
-    @apply bg-squid-red hover:bg-squid-red/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-squid-red/30 active:scale-95;
+    @apply bg-primary hover:bg-primary/80 text-primary-foreground font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg active:scale-95;
+    box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
   }
 
   .squid-button-green {
-    @apply bg-squid-green hover:bg-squid-green/80 text-squid-dark font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-squid-green/30 active:scale-95;
+    @apply bg-accent hover:bg-accent/80 text-accent-foreground font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg active:scale-95;
+    box-shadow: 0 4px 20px hsl(var(--accent) / 0.3);
   }
 
   .squid-card {
-    @apply bg-squid-darker border border-squid-gray rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300;
+    @apply bg-card border border-border rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300;
   }
 
   .geometric-shape {

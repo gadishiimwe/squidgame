@@ -63,12 +63,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Squid Game colors
-				'squid-red': '#FF004C',
-				'squid-green': '#00FF88',
-				'squid-dark': '#0D0D0D',
-				'squid-darker': '#1A1A1A',
-				'squid-gray': '#2A2A2A',
+				// Squid Game colors (converted to HSL)
+				'squid-red': 'hsl(345 100% 50%)',
+				'squid-green': 'hsl(151 100% 50%)',
+				'squid-dark': 'hsl(0 0% 5%)',
+				'squid-darker': 'hsl(0 0% 10%)',
+				'squid-gray': 'hsl(0 0% 16%)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

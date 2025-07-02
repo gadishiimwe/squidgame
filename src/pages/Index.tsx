@@ -32,38 +32,38 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-squid-dark flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-foreground text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-squid-dark text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-squid-dark/90 backdrop-blur-md border-b border-squid-gray">
+      <nav className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Circle className="w-6 h-6 text-squid-red" />
-            <Triangle className="w-6 h-6 text-squid-green" />
-            <Square className="w-6 h-6 text-white" />
+            <Circle className="w-6 h-6 text-primary" />
+            <Triangle className="w-6 h-6 text-accent" />
+            <Square className="w-6 h-6 text-foreground" />
             <span className="text-xl font-bold">The Challenge Arena</span>
           </div>
           
           <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-400">
-              Next Round: <span className="text-squid-green font-mono animate-countdown">{formatTime(timeLeft)}</span>
+            <div className="text-sm text-muted-foreground">
+              Next Round: <span className="text-accent font-mono animate-countdown">{formatTime(timeLeft)}</span>
             </div>
             {user ? (
               <div className="flex items-center space-x-3">
                 <Link to="/dashboard">
-                  <Button variant="outline" className="border-squid-green text-squid-green hover:bg-squid-green hover:text-squid-dark">
+                  <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                     Dashboard
                   </Button>
                 </Link>
                 {profile?.role === 'admin' && (
                   <Link to="/admin">
-                    <Button variant="outline" className="border-squid-red text-squid-red hover:bg-squid-red hover:text-white">
+                    <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                       Admin
                     </Button>
                   </Link>
@@ -77,7 +77,7 @@ const Index = () => {
             ) : (
               <>
                 <Link to="/auth">
-                  <Button variant="outline" className="border-squid-red text-squid-red hover:bg-squid-red hover:text-white">
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                     Login
                   </Button>
                 </Link>

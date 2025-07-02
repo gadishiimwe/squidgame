@@ -23,41 +23,41 @@ const StatsCounter = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-squid-darker/50">
+    <section className="py-16 bg-secondary/50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           <div className="space-y-2">
-            <div className="text-3xl md:text-4xl font-bold text-squid-green animate-pulse">
+            <div className="text-3xl md:text-4xl font-bold text-accent animate-pulse">
               {stats.totalPaid.toLocaleString()} RWF
             </div>
-            <div className="text-sm text-gray-400 uppercase tracking-wide">Total Prizes Paid</div>
+            <div className="text-sm text-muted-foreground uppercase tracking-wide">Total Prizes Paid</div>
           </div>
           
           <div className="space-y-2">
-            <div className="text-3xl md:text-4xl font-bold text-squid-red animate-pulse">
+            <div className="text-3xl md:text-4xl font-bold text-primary animate-pulse">
               {stats.gamesPlayed.toLocaleString()}
             </div>
-            <div className="text-sm text-gray-400 uppercase tracking-wide">Games Completed</div>
+            <div className="text-sm text-muted-foreground uppercase tracking-wide">Games Completed</div>
           </div>
           
           <div className="space-y-2">
-            <div className="text-3xl md:text-4xl font-bold text-white animate-pulse">
+            <div className="text-3xl md:text-4xl font-bold text-foreground animate-pulse">
               {stats.playersRegistered.toLocaleString()}
             </div>
-            <div className="text-sm text-gray-400 uppercase tracking-wide">Players Registered</div>
+            <div className="text-sm text-muted-foreground uppercase tracking-wide">Players Registered</div>
           </div>
           
           <div className="space-y-2">
-            <div className="text-3xl md:text-4xl font-bold text-squid-green animate-pulse">
+            <div className="text-3xl md:text-4xl font-bold text-accent animate-pulse">
               {stats.averageWinRate}%
             </div>
-            <div className="text-sm text-gray-400 uppercase tracking-wide">Win Rate</div>
+            <div className="text-sm text-muted-foreground uppercase tracking-wide">Win Rate</div>
           </div>
         </div>
         
         <div className="mt-8 text-center">
-          <div className="inline-flex items-center space-x-2 text-sm text-gray-400">
-            <div className="w-2 h-2 bg-squid-green rounded-full animate-pulse"></div>
+          <div className="inline-flex items-center space-x-2 text-sm text-muted-foreground">
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
             <span>Stats update in real-time</span>
           </div>
         </div>
