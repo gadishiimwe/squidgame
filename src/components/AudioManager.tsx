@@ -26,7 +26,12 @@ const AudioManager = () => {
       }
     };
 
-    tryAutoplay();
+    // Only try autoplay if audio source is valid
+    const handleCanPlay = () => {
+      tryAutoplay();
+    };
+
+    audio.addEventListener('canplay', handleCanPlay);
 
     // Handle audio events
     const handlePlay = () => setIsPlaying(true);
@@ -36,6 +41,7 @@ const AudioManager = () => {
     audio.addEventListener('pause', handlePause);
 
     return () => {
+      audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
     };
@@ -68,10 +74,14 @@ const AudioManager = () => {
       {/* Audio element with a royalty-free placeholder URL */}
       <audio
         ref={audioRef}
-        preload="auto"
-        onError={() => console.log('Audio failed to load')}
+        preload="none"
+        onError={(e) => {
+          console.log('Audio failed to load - using placeholder files');
+          setIsPlaying(false);
+        }}
+        onLoadStart={() => console.log('Audio loading started')}
       >
-        {/* You'll need to replace this with your actual audio file */}
+        {/* Placeholder audio files - replace with actual royalty-free audio */}
         <source src="/audio/squid-game-theme.mp3" type="audio/mpeg" />
         <source src="/audio/squid-game-theme.ogg" type="audio/ogg" />
         Your browser does not support the audio element.
