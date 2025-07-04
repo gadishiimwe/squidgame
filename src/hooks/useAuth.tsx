@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         .from('profiles')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle(); // Use maybeSingle instead of single to handle missing profiles
 
       if (error) {
         console.error('Error fetching profile:', error);
@@ -61,23 +61,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        const userProfile = await fetchProfile(session.user.id);
-        setProfile(userProfile);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user ?? null);
         
-        // Ensure admin account is set up
-        if (session.user.email === 'gadyishimwe1@gmail.com') {
-          await ensureAdminAccount();
-          // Refetch profile to get updated role
-          const updatedProfile = await fetchProfile(session.user.id);
-          setProfile(updatedProfile);
+        if (session?.user) {
+          const userProfile = await fetchProfile(session.user.id);
+          setProfile(userProfile);
+          
+          // Ensure admin account is set up
+          if (session.user.email === 'gadyishimwe1@gmail.com') {
+            await ensureAdminAccount();
+            // Refetch profile to get updated role
+            const updatedProfile = await fetchProfile(session.user.id);
+            setProfile(updatedProfile);
+          }
         }
+      } catch (error) {
+        console.error('Error getting initial session:', error);
+      } finally {
+        setLoading(false);
       }
-      
-      setLoading(false);
     };
 
     getInitialSession();
@@ -87,16 +91,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        const userProfile = await fetchProfile(session.user.id);
-        setProfile(userProfile);
-        
-        // Ensure admin account is set up
-        if (session.user.email === 'gadyishimwe1@gmail.com') {
-          await ensureAdminAccount();
-          // Refetch profile to get updated role
-          const updatedProfile = await fetchProfile(session.user.id);
-          setProfile(updatedProfile);
-        }
+        // Use setTimeout to prevent deadlock in auth state change
+        setTimeout(async () => {
+          try {
+            const userProfile = await fetchProfile(session.user.id);
+            setProfile(userProfile);
+            
+            // Ensure admin account is set up
+            if (session.user.email === 'gadyishimwe1@gmail.com') {
+              await ensureAdminAccount();
+              // Refetch profile to get updated role
+              const updatedProfile = await fetchProfile(session.user.id);
+              setProfile(updatedProfile);
+            }
+          } catch (error) {
+            console.error('Error in auth state change:', error);
+          }
+        }, 0);
       } else {
         setProfile(null);
       }

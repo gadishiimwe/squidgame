@@ -8,7 +8,7 @@ export const ensureAdminAccount = async () => {
       .from('profiles')
       .select('*')
       .eq('email', 'gadyishimwe1@gmail.com')
-      .single();
+      .maybeSingle();
 
     console.log('Admin profile check:', adminProfile);
 
