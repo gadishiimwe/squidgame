@@ -10,6 +10,7 @@ import Leaderboard from '@/components/Leaderboard';
 import StatsCounter from '@/components/StatsCounter';
 import UserProfile from '@/components/UserProfile';
 import Footer from '@/components/Footer';
+import BackgroundMusic from '@/components/BackgroundMusic';
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour countdown
@@ -111,6 +112,7 @@ const Index = () => {
       </div>
 
       <Footer />
+      <BackgroundMusic />
     </div>
   );
 };
