@@ -1,11 +1,14 @@
-  
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Circle, Square, Triangle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import '@/flip-card.css';
 
 const GameModes = () => {
   const { user } = useAuth();
-  
+
   const soloStats = {
     playersWaiting: 3,
     nextRound: '5 mins',
@@ -33,11 +36,11 @@ const GameModes = () => {
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Solo Challenge */}
-          <div className="arena-card">
+          <div className="flip-card">
             <div className="content">
               <div className="back">
                 <div className="back-content">
-                  <svg stroke="#ffffff" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
+                  <svg stroke="#ffffff" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
                     <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
                     <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -54,7 +57,7 @@ const GameModes = () => {
                   <div className="circle" id="bottom"></div>
                 </div>
                 <div className="front-content">
-                  <small className="badge">Solo Challenge</small>
+                  <small className="badge">Solo</small>
                   <div className="description">
                     <div className="title">
                       <p className="title">
@@ -62,51 +65,9 @@ const GameModes = () => {
                       </p>
                       <Circle className="w-4 h-4 text-squid-red" />
                     </div>
-                    <div className="stats-grid">
-                      <div className="stat-item">
-                        <div className="stat-label">Entry Fee</div>
-                        <div className="stat-value text-squid-red">{soloStats.entry}</div>
-                      </div>
-                      <div className="stat-item">
-                        <div className="stat-label">Winner Prize</div>
-                        <div className="stat-value text-squid-green">{soloStats.prize}</div>
-                      </div>
-                      <div className="stat-item">
-                        <div className="stat-label">Players Needed</div>
-                        <div className="stat-value">5 Players</div>
-                      </div>
-                      <div className="stat-item">
-                        <div className="stat-label">Next Round</div>
-                        <div className="stat-value text-squid-green">{soloStats.nextRound}</div>
-                      </div>
-                    </div>
-                    <div className="challenge-stages">
-                      <h4 className="stages-title">Challenge Stages:</h4>
-                      <div className="stages-list">
-                        <div className="stage-item">
-                          <Square className="w-3 h-3 text-squid-red mr-2" />
-                          Memory Pattern Recognition
-                        </div>
-                        <div className="stage-item">
-                          <Triangle className="w-3 h-3 text-squid-green mr-2" />
-                          Speed Calculation Challenge
-                        </div>
-                        <div className="stage-item">
-                          <Circle className="w-3 h-3 text-white mr-2" />
-                          Final Elimination Round
-                        </div>
-                      </div>
-                    </div>
                     <p className="card-footer">
-                      {soloStats.playersWaiting}/5 WAITING • Entry: {soloStats.entry}
+                      Entry: {soloStats.entry} | Prize: {soloStats.prize}
                     </p>
-                    <div className="mt-4">
-                      <Link to={user ? "/challenge" : "/auth"}>
-                        <button className="w-full squid-button text-sm py-2 px-4 rounded-lg font-semibold hover:animate-pulse-glow transition-all duration-300">
-                          Join Solo Challenge - {soloStats.entry}
-                        </button>
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -114,11 +75,11 @@ const GameModes = () => {
           </div>
 
           {/* Team Battle */}
-          <div className="arena-card team-battle">
+          <div className="flip-card">
             <div className="content">
               <div className="back">
                 <div className="back-content">
-                  <svg stroke="#ffffff" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
+                  <svg stroke="#ffffff" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
                     <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
                     <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -135,7 +96,7 @@ const GameModes = () => {
                   <div className="circle" id="bottom"></div>
                 </div>
                 <div className="front-content">
-                  <small className="badge">Team Battle</small>
+                  <small className="badge">Team</small>
                   <div className="description">
                     <div className="title">
                       <p className="title">
@@ -143,56 +104,9 @@ const GameModes = () => {
                       </p>
                       <Triangle className="w-4 h-4 text-squid-green" />
                     </div>
-                    <div className="stats-grid">
-                      <div className="stat-item">
-                        <div className="stat-label">Team Size</div>
-                        <div className="stat-value">3-5 Players</div>
-                      </div>
-                      <div className="stat-item">
-                        <div className="stat-label">Avg Prize Pool</div>
-                        <div className="stat-value text-squid-green">{teamStats.avgPot}</div>
-                      </div>
-                      <div className="stat-item">
-                        <div className="stat-label">Active Teams</div>
-                        <div className="stat-value text-squid-green">{teamStats.teamsActive}</div>
-                      </div>
-                      <div className="stat-item">
-                        <div className="stat-label">Next Battle</div>
-                        <div className="stat-value">{teamStats.nextBattle}</div>
-                      </div>
-                    </div>
-                    <div className="challenge-stages">
-                      <h4 className="stages-title">Battle Features:</h4>
-                      <div className="stages-list">
-                        <div className="stage-item">
-                          <Square className="w-3 h-3 text-squid-red mr-2" />
-                          Coordinate team strategies
-                        </div>
-                        <div className="stage-item">
-                          <Triangle className="w-3 h-3 text-squid-green mr-2" />
-                          Higher stake competitions
-                        </div>
-                        <div className="stage-item">
-                          <Circle className="w-3 h-3 text-white mr-2" />
-                          Winner-takes-all format
-                        </div>
-                      </div>
-                    </div>
                     <p className="card-footer">
-                      {teamStats.teamsActive} TEAMS ACTIVE • Avg Pot: {teamStats.avgPot}
+                      Teams: {teamStats.teamsActive} | Avg Pot: {teamStats.avgPot}
                     </p>
-                    <div className="mt-4 flex gap-2">
-                      <Link to={user ? "/teams" : "/auth"} className="flex-1">
-                        <button className="w-full squid-button-green text-sm py-2 px-3 rounded-lg font-semibold hover:animate-pulse transition-all duration-300">
-                          Create Team
-                        </button>
-                      </Link>
-                      <Link to={user ? "/teams" : "/auth"} className="flex-1">
-                        <button className="w-full border border-squid-green text-squid-green hover:bg-squid-green hover:text-squid-dark text-sm py-2 px-3 rounded-lg font-semibold transition-all duration-300">
-                          Join Team
-                        </button>
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>

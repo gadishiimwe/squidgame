@@ -11,6 +11,7 @@ import StatsCounter from '@/components/StatsCounter';
 import UserProfile from '@/components/UserProfile';
 import Footer from '@/components/Footer';
 import BackgroundMusic from '@/components/BackgroundMusic';
+import RadarLoader from '@/components/RadarLoader';
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour countdown
@@ -33,8 +34,14 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-foreground text-xl">Loading...</div>
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center">
+        <RadarLoader size="lg" theme="squid-red" />
+        <div className="mt-8 text-foreground text-xl font-semibold">
+          Loading Challenge Arena...
+        </div>
+        <div className="mt-2 text-muted-foreground text-sm">
+          Preparing your gaming experience
+        </div>
       </div>
     );
   }
@@ -70,22 +77,25 @@ const Index = () => {
                   </Link>
                 )}
                 <Link to="/challenge">
-                  <Button className="squid-button">
-                    Join Challenge
-                  </Button>
+                  <button className="uiverse-button squid-red small">
+                    <div className="blob1"></div>
+                    <div className="inner">Join Challenge</div>
+                  </button>
                 </Link>
               </div>
             ) : (
               <>
                 <Link to="/auth">
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                    Login
-                  </Button>
+                  <button className="uiverse-button squid-red small">
+                    <div className="blob1"></div>
+                    <div className="inner">Login</div>
+                  </button>
                 </Link>
                 <Link to="/auth">
-                  <Button className="squid-button">
-                    Join Challenge
-                  </Button>
+                  <button className="uiverse-button squid-green small">
+                    <div className="blob1"></div>
+                    <div className="inner">Join Challenge</div>
+                  </button>
                 </Link>
               </>
             )}
