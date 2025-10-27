@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import RadarLoader from './RadarLoader';
 
 interface AuthGuardProps {
   children: React.ReactNode;
@@ -24,8 +25,14 @@ const AuthGuard = ({ children, requireAuth = true }: AuthGuardProps) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-squid-dark flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-squid-dark flex flex-col items-center justify-center">
+        <RadarLoader size="md" theme="squid-red" />
+        <div className="mt-6 text-white text-lg font-semibold">
+          Authenticating...
+        </div>
+        <div className="mt-2 text-gray-400 text-sm">
+          Verifying your access
+        </div>
       </div>
     );
   }

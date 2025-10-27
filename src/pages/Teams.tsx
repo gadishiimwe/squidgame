@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Users, Plus, Search, Crown, ArrowLeft, UserCheck } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Link } from 'react-router-dom';
+import RadarLoader from '@/components/RadarLoader';
 import { useTeams } from '@/hooks/useTeams';
 
 const Teams = () => {
@@ -68,8 +69,14 @@ const Teams = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-squid-dark flex items-center justify-center">
-        <div className="text-white text-xl">Loading teams...</div>
+      <div className="min-h-screen bg-squid-dark flex flex-col items-center justify-center">
+        <RadarLoader size="md" theme="squid-green" />
+        <div className="mt-6 text-white text-lg font-semibold">
+          Loading Teams...
+        </div>
+        <div className="mt-2 text-gray-400 text-sm">
+          Gathering team information
+        </div>
       </div>
     );
   }
