@@ -6,7 +6,9 @@
 @tailwind utilities;
 
 /* Squid Game themed design system */
-
+*{
+  color:antiquewhite;
+}
 @layer base {
   :root {
     --background: 13 13 13; /* #0D0D0D */
@@ -109,5 +111,30 @@
       stroke-dasharray: 1000 0;
       fill: hsl(var(--primary));
     }
+  }
+
+  /* Footer link styles */
+  a {
+    color: white;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:before{
+    content: '';
+    background: #54b3d6;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:hover::before{
+    width: 100%;
   }
 }

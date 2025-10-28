@@ -1,4 +1,5 @@
-# TODO: Replace Navbar Logo with Animated SVG
+# TODO: Add Animated Link Styles to Footer
 
-- [x] Edit `squidgame/src/pages/Index.tsx` to replace the current logo (icons and text) with the provided SVG, adding class "logo-path"
-- [x] Edit `squidgame/src/index.css` to add the CSS for the logo animation (keyframes and styles)
+- [x] Update squidgame/src/index.css to add the 'a' element styles (gradient background, hover effects, underline animation)
+- [x] Update squidgame/src/components/Footer.tsx to wrap list items in <a> tags for the links to apply styles
+- [x] Test the footer links to ensure styles are applied correctly

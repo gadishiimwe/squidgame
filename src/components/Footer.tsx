@@ -31,10 +31,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-semibold">Game Modes</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Solo Challenges</li>
-              <li>Team Battles</li>
-              <li>Tournament Mode</li>
-              <li>Practice Arena</li>
+              <li><a href="#">Solo Challenges</a></li>
+              <li><a href="#">Team Battles</a></li>
+              <li><a href="#">Tournament Mode</a></li>
+              <li><a href="#">Practice Arena</a></li>
             </ul>
           </div>
 
@@ -42,10 +42,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-semibold">Support</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>How to Play</li>
-              <li>Payment Help</li>
-              <li>Account Issues</li>
-              <li>Contact Us</li>
+              <li><a href="#">How to Play</a></li>
+              <li><a href="#">Payment Help</a></li>
+              <li><a href="#">Account Issues</a></li>
+              <li><a href="#">Contact Us</a></li>
             </ul>
           </div>
 
@@ -53,10 +53,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-semibold">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Terms of Service</li>
-              <li>Privacy Policy</li>
-              <li>Fair Play Rules</li>
-              <li>Age Verification</li>
+              <li><a href="https://fancy-coming-soon.vercel.app/">Terms of Service</a></li>
+              <li><a href="https://fancy-coming-soon.vercel.app/">Privacy Policy</a></li>
+              <li><a href="https://fancy-coming-soon.vercel.app/">Fair Play Rules</a></li>
+              <li><a href="https://fancy-coming-soon.vercel.app/">Age Verification</a></li>
             </ul>
           </div>
         </div>
