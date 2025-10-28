@@ -101,7 +101,7 @@ const GameModes = () => {
                       {soloStats.playersWaiting}/5 WAITING • Entry: {soloStats.entry}
                     </p>
                     <div className="mt-4">
-                      <Link to={user ? "/challenge" : "/auth"}>
+                      <Link to="/challenge">
                         <button className="w-full squid-button text-sm py-2 px-4 rounded-lg font-semibold hover:animate-pulse-glow transition-all duration-300">
                           Join Solo Challenge - {soloStats.entry}
                         </button>
@@ -182,12 +182,12 @@ const GameModes = () => {
                       {teamStats.teamsActive} TEAMS ACTIVE • Avg Pot: {teamStats.avgPot}
                     </p>
                     <div className="mt-4 flex gap-2">
-                      <Link to={user ? "/teams" : "/auth"} className="flex-1">
+                      <Link to="/teams" className="flex-1">
                         <button className="w-full squid-button-green text-sm py-2 px-3 rounded-lg font-semibold hover:animate-pulse transition-all duration-300">
                           Create Team
                         </button>
                       </Link>
-                      <Link to={user ? "/teams" : "/auth"} className="flex-1">
+                      <Link to="/teams" className="flex-1">
                         <button className="w-full border border-squid-green text-squid-green hover:bg-squid-green hover:text-squid-dark text-sm py-2 px-3 rounded-lg font-semibold transition-all duration-300">
                           Join Team
                         </button>

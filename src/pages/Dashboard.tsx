@@ -5,14 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Wallet, Trophy, Users, History, ArrowLeft } from 'lucide-react';
-import { useAuth } from '@/hooks/useAuth';
+
 import { Link } from 'react-router-dom';
 import UserProfile from '@/components/UserProfile';
 import WalletTopup from '@/components/WalletTopup';
 import { useTeams } from '@/hooks/useTeams';
 
 const Dashboard = () => {
-  const { user, profile } = useAuth();
   const { myTeam } = useTeams();
   const [activeTab, setActiveTab] = useState('overview');
 
@@ -23,13 +22,12 @@ const Dashboard = () => {
     { id: 3, name: 'Solo Challenge #122', date: '2024-12-25', result: 'Won', prize: 15000 },
   ];
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-squid-dark flex items-center justify-center">
-        <div className="text-white text-xl">Please log in to access your dashboard</div>
-      </div>
-    );
-  }
+  // Mock profile data for static frontend design
+  const mockProfile = {
+    wallet_balance: 50000,
+    total_wins: 15,
+    total_games: 25,
+  };
 
   return (
     <div className="min-h-screen bg-squid-dark text-white">
@@ -73,21 +71,21 @@ const Dashboard = () => {
                     <Card className="bg-squid-darker border-squid-gray">
                       <CardContent className="p-6 text-center">
                         <Wallet className="w-8 h-8 text-squid-green mx-auto mb-2" />
-                        <div className="text-2xl font-bold text-white">{profile?.wallet_balance || 0} RWF</div>
+                        <div className="text-2xl font-bold text-white">{mockProfile.wallet_balance} RWF</div>
                         <div className="text-sm text-gray-400">Current Balance</div>
                       </CardContent>
                     </Card>
                     <Card className="bg-squid-darker border-squid-gray">
                       <CardContent className="p-6 text-center">
                         <Trophy className="w-8 h-8 text-squid-red mx-auto mb-2" />
-                        <div className="text-2xl font-bold text-white">{profile?.total_wins || 0}</div>
+                        <div className="text-2xl font-bold text-white">{mockProfile.total_wins}</div>
                         <div className="text-sm text-gray-400">Total Wins</div>
                       </CardContent>
                     </Card>
                     <Card className="bg-squid-darker border-squid-gray">
                       <CardContent className="p-6 text-center">
                         <Users className="w-8 h-8 text-white mx-auto mb-2" />
-                        <div className="text-2xl font-bold text-white">{profile?.total_games || 0}</div>
+                        <div className="text-2xl font-bold text-white">{mockProfile.total_games}</div>
                         <div className="text-sm text-gray-400">Games Played</div>
                       </CardContent>
                     </Card>
