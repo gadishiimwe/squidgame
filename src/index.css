@@ -88,4 +88,26 @@
   .neon-glow {
     text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
   }
+
+  .logo-path {
+    stroke: hsl(var(--primary));
+    stroke-width: 1px;
+    fill: none;
+    animation: stroke-fill 3s ease-in-out infinite;
+  }
+
+  @keyframes stroke-fill {
+    0% {
+      stroke-dasharray: 0 1000;
+      fill: none;
+    }
+    50% {
+      stroke-dasharray: 500 500;
+      fill: hsl(var(--primary));
+    }
+    100% {
+      stroke-dasharray: 1000 0;
+      fill: hsl(var(--primary));
+    }
+  }
 }
