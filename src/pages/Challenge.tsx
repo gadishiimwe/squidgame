@@ -1,4 +1,4 @@
-
+''
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,29 +15,9 @@ const Challenge = () => {
   const [isJoining, setIsJoining] = useState(false);
 
   const handleJoinChallenge = async () => {
-    if (!user) {
-      toast({
-        title: "Login Required",
-        description: "Please log in to join a challenge.",
-        variant: "destructive",
-      });
-      navigate('/auth');
-      return;
-    }
-
-    const entryFee = 5000;
-    if ((profile?.wallet_balance || 0) < entryFee) {
-      toast({
-        title: "Insufficient Balance",
-        description: `You need ${entryFee} RWF to join this challenge. Please add money to your wallet.`,
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsJoining(true);
-    
-    // Simulate payment processing
+
+    // Simulate joining challenge (static frontend)
     setTimeout(() => {
       toast({
         title: "Challenge Joined!",
@@ -48,27 +28,7 @@ const Challenge = () => {
     }, 2000);
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-squid-dark flex items-center justify-center">
-        <Card className="squid-card border-squid-gray max-w-md">
-          <CardHeader>
-            <CardTitle className="text-white text-center">Login Required</CardTitle>
-            <CardDescription className="text-gray-400 text-center">
-              You need to be logged in to join challenges
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <Link to="/auth">
-              <Button className="squid-button">
-                Login to Continue
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // Removed login check for static frontend
 
   return (
     <div className="min-h-screen bg-squid-dark text-white">
@@ -159,18 +119,13 @@ const Challenge = () => {
               </div>
 
               <div className="pt-6 border-t border-squid-gray">
-                <Button 
+                <Button
                   onClick={handleJoinChallenge}
-                  disabled={isJoining || (profile?.wallet_balance || 0) < 5000}
+                  disabled={isJoining}
                   className="w-full squid-button text-lg py-6"
                 >
-                  {isJoining ? 'Processing Payment...' : 'Join Challenge - 5,000 RWF'}
+                  {isJoining ? 'Joining Challenge...' : 'Join Challenge - 5,000 RWF'}
                 </Button>
-                {(profile?.wallet_balance || 0) < 5000 && (
-                  <p className="text-center text-squid-red text-sm mt-2">
-                    Insufficient balance. Please add money to your wallet.
-                  </p>
-                )}
               </div>
             </CardContent>
           </Card>

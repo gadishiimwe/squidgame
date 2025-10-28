@@ -12,74 +12,93 @@ import RadarLoader from '@/components/RadarLoader';
 import { useTeams } from '@/hooks/useTeams';
 
 const Teams = () => {
+  const { myTeam } = useTeams();
   const { user } = useAuth();
-  const { teams, myTeam, loading, createTeam, joinTeam, leaveTeam } = useTeams();
   const [teamName, setTeamName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [joiningTeamId, setJoiningTeamId] = useState<string | null>(null);
 
+  // Mock data for static frontend design
+  const mockTeams = [
+    {
+      id: '1',
+      name: 'Squid Warriors',
+      member_count: 3,
+      max_members: 5,
+      members: [
+        { id: '1', user_id: 'user1', profiles: { full_name: 'John Doe' } },
+        { id: '2', user_id: 'user2', profiles: { full_name: 'Jane Smith' } },
+        { id: '3', user_id: 'user3', profiles: { full_name: 'Bob Johnson' } }
+      ],
+      creator_id: 'user1'
+    },
+    {
+      id: '2',
+      name: 'Red Light Raiders',
+      member_count: 2,
+      max_members: 5,
+      members: [
+        { id: '4', user_id: 'user4', profiles: { full_name: 'Alice Brown' } },
+        { id: '5', user_id: 'user5', profiles: { full_name: 'Charlie Wilson' } }
+      ],
+      creator_id: 'user4'
+    },
+    {
+      id: '3',
+      name: 'Game Masters',
+      member_count: 5,
+      max_members: 5,
+      members: [
+        { id: '6', user_id: 'user6', profiles: { full_name: 'Diana Prince' } },
+        { id: '7', user_id: 'user7', profiles: { full_name: 'Eve Davis' } },
+        { id: '8', user_id: 'user8', profiles: { full_name: 'Frank Miller' } },
+        { id: '9', user_id: 'user9', profiles: { full_name: 'Grace Lee' } },
+        { id: '10', user_id: 'user10', profiles: { full_name: 'Henry Ford' } }
+      ],
+      creator_id: 'user6'
+    }
+  ];
+
+  const mockMyTeam = {
+    id: '1',
+    name: 'Squid Warriors',
+    member_count: 3,
+    max_members: 5,
+    members: [
+      { id: '1', user_id: 'user1', profiles: { full_name: 'John Doe' } },
+      { id: '2', user_id: 'user2', profiles: { full_name: 'Jane Smith' } },
+      { id: '3', user_id: 'user3', profiles: { full_name: 'Bob Johnson' } }
+    ],
+    creator_id: 'user1'
+  };
+
   const handleCreateTeam = async () => {
     if (!teamName.trim()) return;
-    
     setIsCreating(true);
-    await createTeam(teamName.trim());
-    setIsCreating(false);
-    setTeamName('');
+    // Mock create team action
+    setTimeout(() => {
+      setIsCreating(false);
+      setTeamName('');
+    }, 1000);
   };
 
   const handleJoinTeam = async (teamId: string, teamName: string) => {
     setJoiningTeamId(teamId);
-    await joinTeam(teamId);
-    setJoiningTeamId(null);
+    // Mock join team action
+    setTimeout(() => {
+      setJoiningTeamId(null);
+    }, 1000);
   };
 
   const handleLeaveTeam = async () => {
-    if (!myTeam) return;
-    await leaveTeam(myTeam.id);
+    // Mock leave team action
   };
 
-  const availableTeams = teams.filter(team => 
+  const availableTeams = mockTeams.filter(team =>
     team.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    !team.members?.some(member => member.user_id === user?.id) &&
     (team.member_count || 0) < team.max_members
   );
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-squid-dark flex items-center justify-center">
-        <Card className="squid-card border-squid-gray max-w-md">
-          <CardHeader>
-            <CardTitle className="text-white text-center">Login Required</CardTitle>
-            <CardDescription className="text-gray-400 text-center">
-              You need to be logged in to manage teams
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <Link to="/auth">
-              <Button className="squid-button">
-                Login to Continue
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-squid-dark flex flex-col items-center justify-center">
-        <RadarLoader size="md" theme="squid-green" />
-        <div className="mt-6 text-white text-lg font-semibold">
-          Loading Teams...
-        </div>
-        <div className="mt-2 text-gray-400 text-sm">
-          Gathering team information
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-squid-dark text-white">
@@ -96,12 +115,12 @@ const Teams = () => {
 
         <div className="grid gap-8">
           {/* My Team Section */}
-          {myTeam ? (
+          {mockMyTeam ? (
             <Card className="squid-card border-squid-green/50">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Crown className="w-6 h-6 text-squid-green mr-2" />
-                  My Team: {myTeam.name}
+                  My Team: {mockMyTeam.name}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
                   Manage your team and view team statistics
@@ -110,7 +129,7 @@ const Teams = () => {
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white">{myTeam.member_count || 0}</div>
+                    <div className="text-2xl font-bold text-white">{mockMyTeam.member_count || 0}</div>
                     <div className="text-sm text-gray-400">Members</div>
                   </div>
                   <div className="text-center">
@@ -126,18 +145,30 @@ const Teams = () => {
                 <div>
                   <h3 className="font-semibold text-white mb-3">Team Members</h3>
                   <div className="space-y-2">
-                    {myTeam.members?.map((member) => (
+                    {mockMyTeam.members?.map((member) => (
                       <div key={member.id} className="flex items-center justify-between p-3 bg-squid-darker rounded-lg">
                         <div className="flex items-center">
-                          {member.user_id === myTeam.creator_id && <Crown className="w-4 h-4 text-squid-green mr-2" />}
-                          <span className="text-white">{member.profiles?.full_name || member.profiles?.email || 'Unknown'}</span>
+                          {member.user_id === mockMyTeam.creator_id && <Crown className="w-4 h-4 text-squid-green mr-2" />}
+                          <span className="text-white">{member.profiles?.full_name || 'Unknown'}</span>
                         </div>
-                        <Badge variant={member.user_id === myTeam.creator_id ? 'default' : 'outline'} 
-                               className={member.user_id === myTeam.creator_id ? 'bg-squid-green text-squid-dark' : 'border-squid-gray text-gray-400'}>
-                          {member.user_id === myTeam.creator_id ? 'Leader' : 'Member'}
+                        <Badge variant={member.user_id === mockMyTeam.creator_id ? 'default' : 'outline'}
+                               className={member.user_id === mockMyTeam.creator_id ? 'bg-squid-green text-squid-dark' : 'border-squid-gray text-gray-400'}>
+                          {member.user_id === mockMyTeam.creator_id ? 'Leader' : 'Member'}
                         </Badge>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-squid-gray">
+                  <h3 className="font-semibold text-white mb-3">Team Battle Options</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <Button className="squid-button-green">
+                      Create Team Battle
+                    </Button>
+                    <Button variant="outline" className="border-squid-red text-squid-red hover:bg-squid-red hover:text-white">
+                      Join Team Battle
+                    </Button>
                   </div>
                 </div>
 
@@ -245,7 +276,7 @@ const Teams = () => {
             <CardHeader>
               <CardTitle className="text-white flex items-center">
                 <Users className="w-6 h-6 text-white mr-2" />
-                All Teams ({teams.length})
+                All Teams ({mockTeams.length})
               </CardTitle>
               <CardDescription className="text-gray-400">
                 View all active teams in the arena
@@ -253,7 +284,7 @@ const Teams = () => {
             </CardHeader>
             <CardContent>
               <div className="grid gap-3">
-                {teams.map((team) => (
+                {mockTeams.map((team) => (
                   <div key={team.id} className="flex items-center justify-between p-4 bg-squid-darker rounded-lg border border-squid-gray">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-squid-red rounded-full flex items-center justify-center mr-3">
