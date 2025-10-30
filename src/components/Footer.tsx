@@ -57,7 +57,7 @@ const Footer = () => {
               <li><a href='https://easy-terms-wizard.vercel.app/'>Terms of Service</a></li>
               <li><a href='https://privacy-palette-maker.vercel.app/'>Privacy Policy</a></li>
               <li><a href="https://fancy-coming-soon.vercel.app/">Fair Play Rules</a></li>
-              <li><a href="/AgeVerification">Age Verification</a></li>
+              <li><a href="https://age-gate-game-cash.vercel.app/">Age Verification</a></li>
             </ul>
           </div>
         </div>
