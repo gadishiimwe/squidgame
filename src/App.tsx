@@ -19,6 +19,7 @@ import Contact_App from "./pages/Contact_App";
 
 
 
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/AgeVerification" element={<AgeVerification />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/Contact" element={<Contact_App />} />
+          
   
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
            

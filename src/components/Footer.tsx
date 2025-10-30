@@ -44,9 +44,9 @@ const Footer = () => {
             <h4 className="text-white font-semibold">Support</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><a href="https://fancy-coming-soon.vercel.app/">How to Play</a></li>
-              <li><a href="/Contact">Payment Help</a></li>
-              <li><a href="/Contact">Account Issues</a></li>
-              <li><a href="/Contact">Contact Us</a></li>
+              <li><a href="https://get-in-touch-2c5v.vercel.app/">Payment Help</a></li>
+              <li><a href="https://get-in-touch-2c5v.vercel.app/">Account Issues</a></li>
+              <li><a href="https://get-in-touch-2c5v.vercel.app/">Contact Us</a></li>
             </ul>
           </div>
 
