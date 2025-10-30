@@ -1,5 +1,6 @@
 
 import { Circle, Square, Triangle } from 'lucide-react';
+import Verify from "@/pages/pages_age/Verify";
 
 const Footer = () => {
   return (
@@ -15,7 +16,7 @@ const Footer = () => {
               <span className="text-xl font-bold">The Challenge Arena</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Rwanda's premier skill-based competition platform. Test your abilities, win real prizes.
+              Global's premier skill-based competition platform. Test your abilities, win real prizes.
             </p>
             <div className="flex space-x-2">
               <div className="w-8 h-8 bg-squid-red rounded-full flex items-center justify-center">
@@ -43,9 +44,9 @@ const Footer = () => {
             <h4 className="text-white font-semibold">Support</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><a href="https://fancy-coming-soon.vercel.app/">How to Play</a></li>
-              <li><a href="https://fancy-coming-soon.vercel.app/">Payment Help</a></li>
-              <li><a href="https://fancy-coming-soon.vercel.app/">Account Issues</a></li>
-              <li><a href="https://fancy-coming-soon.vercel.app/">Contact Us</a></li>
+              <li><a href="/Contact">Payment Help</a></li>
+              <li><a href="/Contact">Account Issues</a></li>
+              <li><a href="/Contact">Contact Us</a></li>
             </ul>
           </div>
 
@@ -53,10 +54,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-semibold">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="https://fancy-coming-soon.vercel.app/">Terms of Service</a></li>
-              <li><a href="https://fancy-coming-soon.vercel.app/">Privacy Policy</a></li>
+              <li><a href='https://easy-terms-wizard.vercel.app/'>Terms of Service</a></li>
+              <li><a href='https://privacy-palette-maker.vercel.app/'>Privacy Policy</a></li>
               <li><a href="https://fancy-coming-soon.vercel.app/">Fair Play Rules</a></li>
-              <li><a href="https://fancy-coming-soon.vercel.app/">Age Verification</a></li>
+              <li><a href="/AgeVerification">Age Verification</a></li>
             </ul>
           </div>
         </div>

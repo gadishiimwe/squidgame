@@ -54,14 +54,14 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="grid w-full grid-cols-3 bg-squid-gray mb-6">
+                <TabsList className="grid w-full grid-cols-3 mb-6">
                   <TabsTrigger value="overview" className="data-[state=active]:bg-squid-red data-[state=active]:text-white">
                     Overview
                   </TabsTrigger>
                   <TabsTrigger value="history" className="data-[state=active]:bg-squid-green data-[state=active]:text-squid-dark">
                     Game History
                   </TabsTrigger>
-                  <TabsTrigger value="teams" className="data-[state=active]:bg-white data-[state=active]:text-squid-dark">
+                  <TabsTrigger value="teams" className="data-[state=active]:bg-squid-green data-[state=active]:text-squid-dark">
                     Teams
                   </TabsTrigger>
                 </TabsList>
@@ -71,7 +71,7 @@ const Dashboard = () => {
                     <Card className="bg-squid-darker border-squid-gray">
                       <CardContent className="p-6 text-center">
                         <Wallet className="w-8 h-8 text-squid-green mx-auto mb-2" />
-                        <div className="text-2xl font-bold text-white">{mockProfile.wallet_balance} RWF</div>
+                        <div className="text-2xl font-bold text-white">{mockProfile.wallet_balance} USD</div>
                         <div className="text-sm text-gray-400">Current Balance</div>
                       </CardContent>
                     </Card>
@@ -98,12 +98,12 @@ const Dashboard = () => {
                       </CardHeader>
                       <CardContent className="space-y-3">
                         <Link to="/challenge">
-                          <Button className="w-full squid-button">
+                          <Button className="w-full squid-button-green">
                             Join Solo Challenge
                           </Button>
                         </Link>
                         <Link to="/teams">
-                          <Button className="w-full squid-button-green">
+                          <Button className="w-full squid-button">
                             Manage Teams
                           </Button>
                         </Link>
@@ -149,7 +149,7 @@ const Dashboard = () => {
                                 {game.result}
                               </Badge>
                               <div className="text-lg font-bold text-white">
-                                {game.prize > 0 ? `+${game.prize} RWF` : 'No Prize'}
+                                {game.prize > 0 ? `+${game.prize} USD` : 'No Prize'}
                               </div>
                             </div>
                           </div>
@@ -179,7 +179,7 @@ const Dashboard = () => {
                             <div className="text-sm text-gray-400">Team Wins</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-white">0 RWF</div>
+                            <div className="text-2xl font-bold text-white">0 USD</div>
                             <div className="text-sm text-gray-400">Total Earnings</div>
                           </div>
                           <div className="text-center">
