@@ -11,7 +11,13 @@ import Dashboard from "./pages/Dashboard";
 import Challenge from "./pages/Challenge";
 import Teams from "./pages/Teams";
 import Admin from "./pages/Admin";
-import NotFound from "./pages/NotFound";
+import AgeVerification from "@/pages/pages_age/AgeVerification"
+import Verify from "@/pages/pages_age/Verify";
+
+import Contact_App from "./pages/Contact_App";
+
+
+
 
 const queryClient = new QueryClient();
 
@@ -29,8 +35,13 @@ const App = () => (
             <Route path="/challenge" element={<Challenge />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/" element={<Index />} />
+          <Route path="/AgeVerification" element={<AgeVerification />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/Contact" element={<Contact_App />} />
+  
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
+           
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

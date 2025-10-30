@@ -160,7 +160,7 @@ const Teams = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-squid-gray">
+                <div className="pt-4 border-t border-squid">
                   <h3 className="font-semibold text-white mb-3">Team Battle Options</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <Button className="squid-button-green">
