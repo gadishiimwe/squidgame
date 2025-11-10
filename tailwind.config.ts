@@ -27,7 +27,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -43,7 +44,8 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					glow: 'hsl(var(--accent-glow))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -63,12 +65,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Squid Game colors (converted to HSL)
-				'squid-red': 'hsl(345 100% 50%)',
-				'squid-green': 'hsl(151 100% 50%)',
-				'squid-dark': 'hsl(0 0% 5%)',
-				'squid-darker': 'hsl(0 0% 10%)',
-				'squid-gray': 'hsl(0 0% 16%)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -94,10 +90,12 @@ export default {
 				},
 				'pulse-glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px rgba(255, 0, 76, 0.3)'
+						boxShadow: '0 0 30px hsl(var(--primary) / 0.4)',
+						transform: 'scale(1)'
 					},
 					'50%': {
-						boxShadow: '0 0 40px rgba(255, 0, 76, 0.6)'
+						boxShadow: '0 0 60px hsl(var(--primary) / 0.6)',
+						transform: 'scale(1.02)'
 					}
 				},
 				'countdown': {
@@ -106,8 +104,8 @@ export default {
 						opacity: '1'
 					},
 					'50%': {
-						transform: 'scale(1.1)',
-						opacity: '0.8'
+						transform: 'scale(1.05)',
+						opacity: '0.9'
 					},
 					'100%': {
 						transform: 'scale(1)',
@@ -116,34 +114,65 @@ export default {
 				},
 				'winner-reveal': {
 					'0%': {
-						transform: 'scale(0.8)',
+						transform: 'scale(0.8) rotate(-5deg)',
 						opacity: '0'
 					},
 					'50%': {
-						transform: 'scale(1.1)',
+						transform: 'scale(1.1) rotate(2deg)',
 						opacity: '0.8'
 					},
 					'100%': {
-						transform: 'scale(1)',
+						transform: 'scale(1) rotate(0deg)',
 						opacity: '1'
 					}
 				},
 				'float': {
 					'0%, 100%': {
-						transform: 'translateY(0px)'
+						transform: 'translateY(0px) rotate(0deg)'
 					},
 					'50%': {
-						transform: 'translateY(-10px)'
+						transform: 'translateY(-20px) rotate(5deg)'
+					}
+				},
+				'glow': {
+					'0%, 100%': {
+						opacity: '1',
+						filter: 'blur(0px)'
+					},
+					'50%': {
+						opacity: '0.8',
+						filter: 'blur(4px)'
+					}
+				},
+				'shimmer': {
+					'0%': {
+						backgroundPosition: '-200% 0'
+					},
+					'100%': {
+						backgroundPosition: '200% 0'
+					}
+				},
+				'slide-up': {
+					'0%': {
+						transform: 'translateY(20px)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'translateY(0)',
+						opacity: '1'
 					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-				'countdown': 'countdown 1s ease-in-out infinite',
-				'winner-reveal': 'winner-reveal 0.8s ease-out',
-				'float': 'float 3s ease-in-out infinite'
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'countdown': 'countdown 2s ease-in-out infinite',
+				'winner-reveal': 'winner-reveal 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
+				'float': 'float 6s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
+				'shimmer': 'shimmer 3s linear infinite',
+				'slide-up': 'slide-up 0.5s ease-out'
 			}
 		}
 	},
